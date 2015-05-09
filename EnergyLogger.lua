@@ -19,16 +19,28 @@ local config = loadFile("energy.config")
 local monitor = peripheral.wrap(config.monitorSide)
 monitor.setTextScale(config.textScale)
 monitor.clear()
+
 local width, height = monitor.getSize()
-
 local maxValue = 100
-local valuePerDot = 1
-
 local valueTable = {}
-for x = 0, width, 1 do
-    valueTable[x] = {}
-    for y = 0, height, 1 do
-        valueTable[x][y] = "*"
+
+for col = 0, width, 1 do
+    valueTable[col] = 0
+end
+
+-- POST INIT FUNCTIONS
+
+function moveOneStepLeftTable()
+    for col = 1, width, 1 do
+        valueTable[col-1] = valueTable[col]
+    end
+    valueTable[width] = 0
+end
+
+function updateLastRow()
+    local v = valueTable[width] = getResource()
+    if maxValue < v then
+        maxValue = v
     end
 end
 
@@ -37,11 +49,17 @@ end
 -- monitor.write(char)
 
 while true do
+    moveOneStepLeftTable()
+    updateLastRow()
     monitor.clear()
-    for x = 0, width, 1 do
-        for y = 0, height, 1 do
-            monitor.setCursorPos(x,y)
-            monitor.write(valueTable[x][y])
+    for col = 0, width, 1 do
+        local val = valueTable[col]
+        
+        local dots = height * (val / maxValue)
+        
+        for y = 0, dots, 1 do
+            monitor.setCursorPos(col,y)
+            monitor.write("*")
         end
     end
     os.sleep(5)
