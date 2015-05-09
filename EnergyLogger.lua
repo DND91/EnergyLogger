@@ -60,7 +60,7 @@ while true do
         
         local dots = height * (val / maxValue)
         
-        for y = 0, dots, 1 do
+        for y = height, (height-dots), -1 do
             monitor.setCursorPos(col,y)
             monitor.write("*")
         end
