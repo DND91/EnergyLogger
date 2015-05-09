@@ -10,6 +10,10 @@ function loadFile(fileName)
   end
 end
 
+function getResource()
+    return math.random(0, 1000)
+end
+
 -- INIT VARIABLES
 local config = loadFile("energy.config")
 local monitor = peripheral.wrap(config.monitorSide)
@@ -17,6 +21,16 @@ monitor.setTextScale(config.textScale)
 monitor.clear()
 local width, height = monitor.getSize()
 
+local maxValue = 100
+local valuePerDot = 1
+
+local valueTable = {}
+for x = 0, width, 1 do
+    valueTable[x] = {}
+    for y = 0, height, 1 do
+        valueTable[x][y] = "*"
+    end
+end
 
 -- PROGRAM BODY
 -- monitor.setCursorPos(x,y)
@@ -27,7 +41,7 @@ while true do
     for x = 0, width, 1 do
         for y = 0, height, 1 do
             monitor.setCursorPos(x,y)
-            monitor.write("*")
+            monitor.write(valueTable[x][y])
         end
     end
     os.sleep(5)
