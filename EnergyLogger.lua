@@ -13,6 +13,18 @@ end
 -- INIT VARIABLES
 local config = loadFile("energy.config")
 local monitor = peripheral.wrap(config.monitorSide)
+local width, height = monitor.getSize()
 
 -- PROGRAM BODY
+-- monitor.setCursorPos(x,y)
+-- monitor.write(char)
+
+while true do
+    monitor.clear()
+    for x = 0, width, 1 do
+        monitor.setCursorPos(x,y)
+        monitor.write("*")
+    end
+    os.sleep(5)
+end
 
