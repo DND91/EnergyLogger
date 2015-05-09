@@ -21,7 +21,7 @@ monitor.setTextScale(config.textScale)
 monitor.clear()
 
 local width, height = monitor.getSize()
-local maxValue = 100
+local maxValue = 0
 local valueTable = {}
 
 for col = 0, width, 1 do
@@ -40,6 +40,7 @@ end
 function updateLastRow()
     local v = getResource()
     valueTable[width] = v
+    print("Max Value: "..maxValue.." Value: "..v)
     if maxValue < v then
         maxValue = v
     end
