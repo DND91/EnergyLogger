@@ -11,6 +11,8 @@ function loadFile(fileName)
 end
 
 -- INIT VARIABLES
-
+local config = loadFile("energy.config")
+local monitor = peripheral.wrap(config.monitorSide)
 
 -- PROGRAM BODY
+
