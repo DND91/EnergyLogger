@@ -22,8 +22,10 @@ local width, height = monitor.getSize()
 while true do
     monitor.clear()
     for x = 0, width, 1 do
-        monitor.setCursorPos(x,y)
-        monitor.write("*")
+        for y = 0, height, 1 do
+            monitor.setCursorPos(x,y)
+            monitor.write("*")
+        end
     end
     os.sleep(5)
 end
