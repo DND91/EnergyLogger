@@ -65,6 +65,6 @@ while true do
             monitor.write("*")
         end
     end
-    os.sleep(5)
+    os.sleep(config.interval)
 end
 
