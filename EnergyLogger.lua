@@ -54,6 +54,7 @@ while true do
     moveOneStepLeftTable()
     updateLastRow()
     monitor.clear()
+    
     for col = 0, width, 1 do
         local val = valueTable[col]
         
