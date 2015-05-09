@@ -38,7 +38,8 @@ function moveOneStepLeftTable()
 end
 
 function updateLastRow()
-    local v = valueTable[width] = getResource()
+    local v = getResource()
+    valueTable[width] = v
     if maxValue < v then
         maxValue = v
     end
